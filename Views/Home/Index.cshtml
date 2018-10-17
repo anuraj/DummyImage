@@ -2,7 +2,60 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<label for="basic-url">Dummy Image URL</label>
+<div class="input-group mb-3">
+  <input type="text" class="form-control" id="ImageURL" readonly="readonly">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" id="CopyToClipboard">Copy to Clipboard</button>
+  </div>
 </div>
+
+<form>
+  
+  <div class="form-row">
+    <div class="col">
+      <label>Width</label>
+      <input type="number" id="Width" class="form-control" placeholder="Width" value="1200">
+    </div>
+    <div class="col">
+      <label>Height</label>
+      <input type="number" id="Height" class="form-control" placeholder="Height" value="400">
+    </div>
+    <div class="col">
+      <label>Background Color</label>
+      <select class="custom-select mr-sm-2" id="bgColor">
+      <option selected>-- SELECT --</option>
+      </select>
+    </div>
+    <div class="col">
+      <label>Foreground Color</label>
+      <select class="custom-select mr-sm-2" id="fgColor">
+      <option selected>-- SELECT --</option>
+      </select>
+    </div>
+    <div class="col">
+      <label>Format</label>
+      <select class="custom-select mr-sm-2" id="format">
+      <option value="png">PNG</option>
+      <option value="jpg">JPG</option>
+      <option value="gif">GIF</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label>Text</label>
+      <input type="text" class="form-control" id="TextInput" placeholder="Text">
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col">
+      <img id="PreviewImage" src="/800x300/ccc/fff.png" class="img-fluid mx-auto d-block" alt="Responsive image">
+    </div>
+  </div>
+  
+  </div>
+</form>
+
+<div id="snackbar">URL Copied to Clipboard.</div>

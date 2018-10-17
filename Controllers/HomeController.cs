@@ -53,7 +53,7 @@ namespace DummyImage.Controllers
             return File(bytes, "image/png");
         }
 
-        [Route("/{size}/{bgcolor:alpha::minlength(3):maxlength(6)}/{fgcolor:alpha:minlength(3):maxlength(6)}.{format:alpha:minlength(3):maxlength(4)}")]
+        [Route("/{size}/{bgcolor:minlength(3):maxlength(6)}/{fgcolor:minlength(3):maxlength(6)}.{format:minlength(3):maxlength(4)}")]
         public IActionResult RenderImageWithForeColor([FromRoute]string size, [FromRoute]string bgcolor, [FromRoute]string fgcolor, [FromRoute]string format, [FromQuery]string text = "")
         {
             var sizeData = GetSize(size);
@@ -103,7 +103,7 @@ namespace DummyImage.Controllers
             string bgColor = "black", string fgColor = "white",
             string format = "png", string text = "")
         {
-            var inputText = text?.Length == 0 ? $"{width} X {height}" : text;
+            var inputText = (text?.Length ?? 0) == 0 ? $"{width} X {height}" : text;
             using (var bitmap = new Bitmap(width, height))
             {
                 using (var graphics = Graphics.FromImage(bitmap))
@@ -112,8 +112,8 @@ namespace DummyImage.Controllers
                     graphics.CompositingQuality = CompositingQuality.HighQuality;
                     graphics.SmoothingMode = SmoothingMode.HighQuality;
 
-                    var selectedBgColor = Color.FromName(bgColor);
-                    var selectedFgColor = Color.FromName(fgColor);
+                    var selectedBgColor = ColorTranslator.FromHtml("#" + bgColor);
+                    var selectedFgColor = ColorTranslator.FromHtml("#" + fgColor);
                     var brush = new SolidBrush(selectedFgColor);
                     var selectedFont = new Font("Segoe UI", 30, FontStyle.Bold, GraphicsUnit.Pixel);
                     var font = GetAdjustedFont(graphics, inputText, selectedFont, width, 100, 30, true);
