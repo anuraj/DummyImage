@@ -37,7 +37,7 @@ namespace DummyImage.Controllers
             return File(bytes, "image/png");
         }
 
-        [Route("/{size}/{bgcolor:alpha::minlength(3):maxlength(6)}")]
+        [Route("/{size}/{bgcolor:alpha:minlength(3):maxlength(6)}")]
         public IActionResult RenderImageWithBgColor([FromRoute]string size, [FromRoute]string bgcolor, [FromQuery]string text = "")
         {
             var sizeData = GetSize(size);
@@ -45,7 +45,7 @@ namespace DummyImage.Controllers
             return File(bytes, "image/png");
         }
 
-        [Route("/{size}/{bgcolor:alpha::minlength(3):maxlength(6)}/{forecolor:alpha:minlength(3):maxlength(6)}")]
+        [Route("/{size}/{bgcolor:alpha:minlength(3):maxlength(6)}/{forecolor:alpha:minlength(3):maxlength(6)}")]
         public IActionResult RenderImageWithForeColorNoExtension([FromRoute]string size, [FromRoute]string bgcolor, [FromRoute]string fgcolor, [FromQuery]string text = "")
         {
             var sizeData = GetSize(size);
