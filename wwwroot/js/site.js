@@ -48,7 +48,15 @@ $(function () {
         buildUrl();
     });
     var buildUrl = function () {
-        $("#ImageURL").val("https://localhost:5001/" + $("#Width").val() + "x" + $("#Height").val()
+        var protocol = location.protocol;
+        var slashes = protocol.concat("//");
+        var port = location.port;
+        var host = slashes.concat(window.location.hostname);
+        if (port && port !== 80) {
+            host = host.concat(":", port);
+        }
+        host = host.concat("/");
+        $("#ImageURL").val(host + $("#Width").val() + "x" + $("#Height").val()
             + "/" + $("#bgColor").val() + "/" + $("#fgColor").val() + "." + $("#format").val()
             + ($("#TextInput").val().length > 1 ? "?text=" + encodeURI($("#TextInput").val()) : ""));
         $("#PreviewImage").attr("src", $("#ImageURL").val());
